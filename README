@@ -15,6 +15,19 @@ and https://github.com/FunnyMan3595/mcp_deobfuscate/blob/mcp_interface/README.tx
 for more details.
 
 
+
+NOTE: In the instructions below:
+      * Paths starting with ./ refer to the same directory this file is in.
+        For example commands, I'll call the directory "ao_git".
+      * Paths starting with $MCP refer to the root directory of your MCP
+        installation.
+        For example commands, I'll call this directory "mcp".
+      * For example commands, I will call your project "GenericMod".
+      * Example commands start with $, and should run in any Linux shell.
+
+
+
+
 To use WITH mcp_interface:
 * Install this directory in $MCP/mods/
 * Edit ./conf/PROJECT_NAME to contain your mod's name.
@@ -22,6 +35,7 @@ To use WITH mcp_interface:
    default to version "alpha".)
 * Place the modified Minecraft source file(s) in src/common/net/minecraft/src/.
 * Rename ./src/common/YOURMOD/ to match conf/PROJECT_NAME.
+  $ mv ao_git/src/common/YOURMOD ao_git/src/common/GenericMod
   (I may fix this later, because it's an extra step that annoys me.)
 * Run recompile_mods, fix any errors, and repeat until there are none.
 * Your completed coremod will now be in $MCP/packages/.
@@ -29,6 +43,7 @@ To use WITH mcp_interface:
 
 To use WITHOUT mcp_interface:
 * Copy ./src/common/YOURMOD to $MCP/src/common/$YOURMOD, renaming appropriately.
+  $ cp ao_git/src/common/YOURMOD mcp/src/common/GenericMod
   (You are using Forge at least, right?  RIGHT?)
 * Edit $MCP/src/common/$YOURMOD/AutoOverride.java, and replace each:
   %conf:PROJECT_NAME%
@@ -40,6 +55,14 @@ To use WITHOUT mcp_interface:
   META-INF/MANIFEST.MF                  (from ./resources/common/)
   $YOURMOD/*                            (from $MCP/reobf/minecraft/)
   Any class files you want to overwrite (from $MCP/reobf/minecraft/)
+
+  $ pushd ao_git/resources/common/  # This is like cd
+  $ zip -r ../../../GenericMod-alpha.zip .
+  $ popd # This returns us to where we were when we ran pushd.
+  $ pushd mcp/reobf/minecraft/
+  $ zip -r ../../../GenericMod-alpha.zip GenericMod/ omg.class wtf.class
+  $ popd
 * Rename the zipfile to have a .jar extension.
+  $ mv GenericMod-alpha.zip GenericMod-alpha.jar
   (And don't complain to me.  I tried: https://github.com/cpw/FML/pull/124)
 * You now have a coremod.
