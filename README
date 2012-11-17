@@ -36,6 +36,7 @@ To use WITHOUT mcp_interface:
 * Edit ./resources/common/META-INF/MANIFEST.MF and replace likewise.
 * Run recompile and reobfuscate.
 * Create a zipfile contaiing:
+  AUTOOVERRIDE_LICENSE                  (from ./resources/common/)
   META-INF/MANIFEST.MF                  (from ./resources/common/)
   $YOURMOD/*                            (from $MCP/reobf/minecraft/)
   Any class files you want to overwrite (from $MCP/reobf/minecraft/)
