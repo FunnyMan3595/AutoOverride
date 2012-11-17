@@ -1,3 +1,5 @@
+package %conf:PROJECT_NAME%;
+
 import cpw.mods.fml.relauncher.*;
 import java.io.*;
 import java.util.*;
