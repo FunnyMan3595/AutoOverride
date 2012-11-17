@@ -1,0 +1,44 @@
+AutoOverride is a simple FML coremod that makes it easy to override Vanilla
+Minecraft classes entirely.
+
+This can and will happily break other coremods or direct minecraft.jar
+modifications, so beware conflicts with things like Optifine.
+
+
+Usage:
+
+This is a mod directory designed for use with mcp_deobfuscate and its
+mcp_interface.  It can be used without, but mcp_interface is recommended.
+
+See https://github.com/FunnyMan3595/mcp_deobfuscate/blob/master/README
+and https://github.com/FunnyMan3595/mcp_deobfuscate/blob/mcp_interface/README.txt
+for more details.
+
+
+To use WITH mcp_interface:
+* Install this directory in $MCP/mods/
+* Edit ./conf/PROJECT_NAME to contain your mod's name.
+  (You may want to add conf/VERSION as well, so that your coremod doesn't
+   default to version "alpha".)
+* Place the modified Minecraft source file(s) in src/common/net/minecraft/src/.
+* Rename ./src/common/YOURMOD/ to match conf/PROJECT_NAME.
+  (I may fix this later, because it's an extra step that annoys me.)
+* Run recompile_mods, fix any errors, and repeat until there are none.
+* Your completed coremod will now be in $MCP/packages/.
+
+
+To use WITHOUT mcp_interface:
+* Copy ./src/common/YOURMOD to $MCP/src/common/$YOURMOD, renaming appropriately.
+  (You are using Forge at least, right?  RIGHT?)
+* Edit $MCP/src/common/$YOURMOD/AutoOverride.java, and replace each:
+  %conf:PROJECT_NAME%
+  with $YOURMOD (the actual name, that is).
+* Edit ./resources/common/META-INF/MANIFEST.MF and replace likewise.
+* Run recompile and reobfuscate.
+* Create a zipfile contaiing:
+  META-INF/MANIFEST.MF                  (from ./resources/common/)
+  $YOURMOD/*                            (from $MCP/reobf/minecraft/)
+  Any class files you want to overwrite (from $MCP/reobf/minecraft/)
+* Rename the zipfile to have a .jar extension.
+  (And don't complain to me.  I tried: https://github.com/cpw/FML/pull/124)
+* You now have a coremod.
