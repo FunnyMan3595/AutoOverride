@@ -31,23 +31,23 @@ NOTE: In the instructions below:
 To use WITH mcp_interface:
 * Install this directory in $MCP/mods/
 * Edit ./conf/PROJECT_NAME to contain your mod's name.
-  (You may want to add conf/VERSION as well, so that your coremod doesn't
-   default to version "alpha".)
+* Edit ./conf/JAVA_PACKAGE, and set it to a suitable java package name.
+  (e.g. "genericmod"; multi-level names like "com.genericmod" may not work.)
+* You may want to edit conf/VERSION as well, so that your coremod doesn't
+  default to version "alpha".
 * Place the modified Minecraft source file(s) in src/common/net/minecraft/src/.
-* Rename ./src/common/YOURMOD/ to match conf/PROJECT_NAME.
-  $ mv ao_git/src/common/YOURMOD ao_git/src/common/GenericMod
-  (I may fix this later, because it's an extra step that annoys me.)
 * Run recompile_mods, fix any errors, and repeat until there are none.
 * Your completed coremod will now be in $MCP/packages/.
 
 
 To use WITHOUT mcp_interface:
-* Copy ./src/common/YOURMOD to $MCP/src/common/$YOURMOD, renaming appropriately.
-  $ cp -r ao_git/src/common/YOURMOD mcp/src/common/GenericMod
-  (You are using Forge at least, right?  RIGHT?)
+* Copy ./src/common/{conf:JAVA_PACKAGE} to $MCP/src/common/YOURMOD,
+  renaming appropriately.
+  $ cp -r 'ao_git/src/common/{conf:JAVA_PACKAGE}' mcp/src/common/GenericMod
+  (Note the quotes here!  {} doesn't play nicely with most shells.)
 * Edit $MCP/src/common/$YOURMOD/AutoOverride.java, and replace each:
-  %conf:PROJECT_NAME%
-  with $YOURMOD (the actual name, that is).
+  %conf:JAVA_PACKAGE%
+  with $YOURMOD (e.g. GenericMod)
 * Edit ./resources/common/META-INF/MANIFEST.MF and replace likewise.
 * Run recompile and reobfuscate.
 * Create a zipfile contaiing:

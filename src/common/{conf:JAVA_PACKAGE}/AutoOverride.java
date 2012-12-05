@@ -1,11 +1,11 @@
-package %conf:PROJECT_NAME%;
+package %conf:JAVA_PACKAGE%;
 
 import cpw.mods.fml.relauncher.*;
 import java.io.*;
 import java.util.*;
 import java.util.zip.*;
 
-@IFMLLoadingPlugin.TransformerExclusions("%conf:PROJECT_NAME%.")
+@IFMLLoadingPlugin.TransformerExclusions("%conf:JAVA_PACKAGE%.")
 public class AutoOverride implements IFMLLoadingPlugin, IClassTransformer {
     public static File zip;
     public static String name = "(uninitialized)";
@@ -16,7 +16,7 @@ public class AutoOverride implements IFMLLoadingPlugin, IClassTransformer {
     }
 
     public String[] getASMTransformerClass() {
-        return new String[] {"%conf:PROJECT_NAME%.AutoOverride"};
+        return new String[] {"%conf:JAVA_PACKAGE%.AutoOverride"};
     }
 
     public String getModContainerClass() {
